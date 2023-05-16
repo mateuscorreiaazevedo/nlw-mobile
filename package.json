@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@types/react": "~18.0.27",
@@ -19,9 +20,12 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
     "@rocketseat/eslint-config": "^1.2.0",
     "babel-plugin-module-resolver": "^5.0.0",
     "eslint": "^8.40.0",
+    "husky": "^8.0.3",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "react-native-dotenv": "^3.4.8",
