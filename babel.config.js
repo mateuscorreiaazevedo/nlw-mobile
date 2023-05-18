@@ -4,15 +4,25 @@ module.exports = function (api) {
     presets: ['babel-preset-expo'],
     plugins: [
       'nativewind/babel',
+      require.resolve('expo-router/babel'),
       [
         'module-resolver',
         {
           root: '.',
-          extensions: ['.ts', '.js', '.tsx', '.jsx', 'android.js', 'android,tsx', 'ios.js', 'ios.tsx'],
+          extensions: [
+            '.ts',
+            '.js',
+            '.tsx',
+            '.jsx',
+            'android.js',
+            'android,tsx',
+            'ios.js',
+            'ios.tsx',
+          ],
           alias: {
-            '@': './src'
-          }
-        }
+            '@': './src',
+          },
+        },
       ],
       [
         'module:react-native-dotenv',
@@ -24,9 +34,9 @@ module.exports = function (api) {
           allowlist: null,
           safe: false,
           allowUndefined: true,
-          verbose: false
-        }
-      ]
-    ]
+          verbose: false,
+        },
+      ],
+    ],
   }
 }

@@ -1,54 +1,22 @@
+import { NlwLogo, bgBlur, StyledStripes } from '@/assets/images'
+import { useAuth, useFont } from '@/modules/core'
 import * as SecureStore from 'expo-secure-store'
+import { authService } from '@/modules/user'
 import { StatusBar } from 'expo-status-bar'
 import * as RN from 'react-native'
-
-import {
-  useFonts,
-  Roboto_400Regular,
-  Roboto_700Bold,
-} from '@expo-google-fonts/roboto'
-import { Montserrat_700Bold } from '@expo-google-fonts/montserrat'
-
-import bgBlur from './src/assets/images/bg-blur.png'
-import Stripes from './src/assets/images/stripes.svg'
-import NlwLogo from './src/assets/images/nlw-spacetime-logo.svg'
-
-import { styled } from 'nativewind'
-import { makeRedirectUri, useAuthRequest } from 'expo-auth-session'
 import { useEffect } from 'react'
-import { authService } from '@/modules/user'
-
-const StyledStripes = styled(Stripes)
-
-const discovery = {
-  authorizationEndpoint: 'https://github.com/login/oauth/authorize',
-  tokenEndpoint: 'https://github.com/login/oauth/access_token',
-  revocationEndpoint:
-    'https://github.com/settings/connections/applications/a0595cf44e8e6f381966',
-}
+import { useRouter } from 'expo-router'
 
 export default function App() {
-  const [hasLoadedFonts] = useFonts({
-    Roboto_400Regular,
-    Roboto_700Bold,
-    Montserrat_700Bold,
-  })
-
-  const [, response, signInWithGithub] = useAuthRequest(
-    {
-      clientId: 'a0595cf44e8e6f381966',
-      scopes: ['identity'],
-      redirectUri: makeRedirectUri({
-        scheme: 'your.app',
-      }),
-    },
-    discovery,
-  )
+  const { response, signInWithGithub } = useAuth()
+  const { hasLoadedFonts } = useFont()
+  const router = useRouter()
 
   async function handleRequestCodeWithGithub(code: string) {
     try {
       const token = await authService.register(code)
       await SecureStore.setItemAsync('auth.token', token!)
+      router.push('/memories')
     } catch (error) {
       console.error((error as any).message)
     }
@@ -62,9 +30,7 @@ export default function App() {
     }
   }, [response])
 
-  if (!hasLoadedFonts) {
-    return null
-  }
+  if (!hasLoadedFonts) return null
 
   return (
     <RN.ImageBackground

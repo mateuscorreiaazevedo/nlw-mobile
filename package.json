@@ -1,7 +1,7 @@
 {
   "name": "nlw-mobile",
   "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "index.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -27,6 +27,14 @@
     "react-native-screens": "~3.20.0",
     "react-native-svg": "13.4.0",
     "typescript": "^4.9.4"
+  },
+  "overrides": {
+    "metro": "0.76.0",
+    "metro-resolver": "0.76.0"
+  },
+  "resolutions": {
+    "metro": "0.76.0",
+    "metro-resolver": "0.76.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
