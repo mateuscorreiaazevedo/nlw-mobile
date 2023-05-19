@@ -5,7 +5,7 @@ type HttpRequest = {
   body?: any
   headers?: any
   params?: any
-  method?: 'get' | 'post' | 'puit' | 'delete'
+  method?: 'get' | 'post' | 'put' | 'delete'
 }
 
 type HttpResponse<T = any> = {
