@@ -1,7 +1,6 @@
-import * as SecureStore from 'expo-secure-store'
+import { tokenUtil, useAuth } from '@/modules/core'
 import { authService } from '@/modules/user'
 import { NlwLogo } from '@/assets/images'
-import { useAuth } from '@/modules/core'
 import { useRouter } from 'expo-router'
 import * as RN from 'react-native'
 import { useEffect } from 'react'
@@ -13,7 +12,7 @@ export default function App() {
   async function handleRequestCodeWithGithub(code: string) {
     try {
       const token = await authService.register(code)
-      await SecureStore.setItemAsync('auth.token', token!)
+      await tokenUtil.setToken(token!)
       router.push('/memories')
     } catch (error) {
       console.error((error as any).message)
